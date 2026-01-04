@@ -1,1 +1,1 @@
-# fullstack-modular-monolith-demo
+# fullstack-modular-monolith-starter
