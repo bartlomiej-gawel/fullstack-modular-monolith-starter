@@ -5,12 +5,12 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="..\..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <ProjectReference Include="..\Common\Common.Infrastructure\Common.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Modules\Identity\Modules.Identity\Modules.Identity.csproj"/>
     </ItemGroup>
 
 </Project>
