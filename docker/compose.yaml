@@ -1,0 +1,19 @@
+﻿name: starter
+
+networks:
+  starter.network:
+    name: starter.network
+
+services:
+  starter.bootstrapper:
+    build:
+      context: ../backend
+      dockerfile: src/Bootstrapper/Dockerfile
+    container_name: starter.bootstrapper
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "5171:8080"
+    networks:
+      - starter.network
