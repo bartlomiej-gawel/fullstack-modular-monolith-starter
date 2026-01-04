@@ -55,9 +55,6 @@ _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
 
-# Containers
-.containers/
-
 # macOS
 .DS_Store
 **/.DS_Store

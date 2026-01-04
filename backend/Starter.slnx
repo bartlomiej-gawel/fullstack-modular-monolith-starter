@@ -1,1 +1,7 @@
-<Solution />
+<Solution>
+    <Folder Name="/src/">
+        <Project Path="src/Bootstrapper/Bootstrapper.csproj"/>
+    </Folder>
+    <Folder Name="/tests/"/>
+    <Project Path="../docker/compose.dcproj"/>
+</Solution>
