@@ -7,4 +7,8 @@
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common\Common.Abstractions\Common.Abstractions.csproj"/>
+    </ItemGroup>
+
 </Project>
