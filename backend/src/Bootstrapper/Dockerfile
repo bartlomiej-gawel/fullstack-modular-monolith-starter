@@ -7,7 +7,15 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+# Bootstrapper
 COPY ["src/Bootstrapper/Bootstrapper.csproj", "src/Bootstrapper/"]
+# Common
+COPY ["src/Common/Common.Abstractions/Common.Abstractions.csproj", "src/Common/Common.Abstractions/"]
+COPY ["src/Common/Common.Infrastructure/Common.Infrastructure.csproj", "src/Common/Common.Infrastructure/"]
+# Identity
+COPY ["src/Modules/Identity/Modules.Identity/Modules.Identity.csproj", "src/Modules/Identity/Modules.Identity/"]
+COPY ["src/Modules/Identity/Modules.Identity.IntegrationEvents/Modules.Identity.IntegrationEvents.csproj", "src/Modules/Identity/Modules.Identity.IntegrationEvents/"]
+
 RUN dotnet restore "src/Bootstrapper/Bootstrapper.csproj"
 COPY . .
 WORKDIR "/src/src/Bootstrapper"

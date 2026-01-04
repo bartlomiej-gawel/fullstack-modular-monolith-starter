@@ -10,5 +10,10 @@
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App"/>
     </ItemGroup>
-    
+
+    <ItemGroup>
+        <PackageReference Include="ErrorOr" Version="2.0.1"/>
+        <PackageReference Include="libphonenumber-csharp" Version="9.0.21"/>
+    </ItemGroup>
+
 </Project>
