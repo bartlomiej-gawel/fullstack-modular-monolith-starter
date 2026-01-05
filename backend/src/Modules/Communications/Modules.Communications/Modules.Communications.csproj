@@ -9,7 +9,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj"/>
-        <ProjectReference Include="..\Modules.Identity.IntegrationEvents\Modules.Identity.IntegrationEvents.csproj"/>
+        <ProjectReference Include="..\..\Identity\Modules.Identity.IntegrationEvents\Modules.Identity.IntegrationEvents.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MailKit" Version="4.14.1"/>
+        <PackageReference Include="Scriban" Version="6.5.2"/>
     </ItemGroup>
 
 </Project>

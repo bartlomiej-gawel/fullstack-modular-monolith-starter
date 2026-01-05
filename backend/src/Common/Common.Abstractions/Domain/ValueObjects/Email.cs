@@ -28,9 +28,6 @@ public sealed partial class Email : ValueObject
         return new Email(value);
     }
 
-    public static implicit operator string(Email value) => value.Value;
-    public static implicit operator Email(string value) => new(value);
-
     protected override IEnumerable<object?> GetEqualityComponents()
     {
         yield return Value;

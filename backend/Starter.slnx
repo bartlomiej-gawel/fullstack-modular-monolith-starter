@@ -1,16 +1,22 @@
 <Solution>
     <Folder Name="/src/">
-        <Project Path="src/Bootstrapper/Bootstrapper.csproj" />
+        <Project Path="src/Bootstrapper/Bootstrapper.csproj"/>
     </Folder>
     <Folder Name="/src/Common/">
-        <Project Path="src/Common/Common.Abstractions/Common.Abstractions.csproj" />
-        <Project Path="src/Common/Common.Infrastructure/Common.Infrastructure.csproj" />
+        <Project Path="src/Common/Common.Abstractions/Common.Abstractions.csproj"/>
+        <Project Path="src/Common/Common.Infrastructure/Common.Infrastructure.csproj"/>
     </Folder>
-    <Folder Name="/src/Modules/" />
+    <Folder Name="/src/Modules/"/>
+    <Folder Name="/src/Modules/Communications/">
+        <Project Path="src/Modules/Communications/Modules.Communications/Modules.Communications.csproj"/>
+    </Folder>
     <Folder Name="/src/Modules/Identity/">
-        <Project Path="src/Modules/Identity/Modules.Identity.IntegrationEvents/Modules.Identity.IntegrationEvents.csproj" />
-        <Project Path="src/Modules/Identity/Modules.Identity/Modules.Identity.csproj" />
+        <Project Path="src/Modules/Identity/Modules.Identity.IntegrationEvents/Modules.Identity.IntegrationEvents.csproj"/>
+        <Project Path="src/Modules/Identity/Modules.Identity/Modules.Identity.csproj"/>
     </Folder>
-    <Folder Name="/tests/" />
-    <Project Path="../docker/compose.dcproj" />
+    <Folder Name="/tests/"/>
+    <Folder Name="/tests/Common/">
+        <Project Path="tests/Common/Common.Abstractions.UnitTests/Common.Abstractions.UnitTests.csproj"/>
+    </Folder>
+    <Project Path="../docker/compose.dcproj"/>
 </Solution>

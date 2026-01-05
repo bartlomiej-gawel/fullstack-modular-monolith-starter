@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -8,8 +9,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj"/>
-        <ProjectReference Include="..\Modules.Identity.IntegrationEvents\Modules.Identity.IntegrationEvents.csproj"/>
+        <ProjectReference Include="..\..\..\src\Common\Common.Abstractions\Common.Abstractions.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="TUnit" Version="1.9.2"/>
     </ItemGroup>
 
 </Project>
