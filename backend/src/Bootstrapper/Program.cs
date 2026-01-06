@@ -1,6 +1,9 @@
+using Common.Infrastructure.Database;
 using Common.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDatabase(builder.Configuration);
 
 var assemblies = ModulesExtensions.LoadAssemblies(builder.Configuration);
 var modules = ModulesExtensions.LoadModules(assemblies);
