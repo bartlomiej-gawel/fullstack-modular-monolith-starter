@@ -1,6 +1,7 @@
 using Common.Abstractions.Domain;
 using Common.Abstractions.Domain.ValueObjects;
 using ErrorOr;
+using Modules.Identity.Domain.Users.Events;
 
 namespace Modules.Identity.Domain.Users;
 
@@ -74,6 +75,16 @@ public sealed class User : AggregateRoot<UserId>
             UserStatus.Inactive,
             UserRole.Backoffice,
             EmailVerificationToken.Generate());
+
+        user.AddDomainEvent(new UserCreatedDomainEvent(
+            user.Id,
+            user.FirstName,
+            user.LastName,
+            user.Email,
+            user.Phone,
+            user.Status,
+            user.Role,
+            user.EmailVerificationToken));
 
         return user;
     }

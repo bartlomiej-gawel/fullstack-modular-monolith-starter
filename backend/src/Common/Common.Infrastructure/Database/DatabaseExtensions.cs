@@ -1,3 +1,5 @@
+using Common.Infrastructure.Database.Interceptors;
+using Common.Infrastructure.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -10,12 +12,14 @@ public static class DatabaseExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddDatabase(IConfiguration configuration)
+        internal IServiceCollection AddDatabase(IConfiguration configuration)
         {
             services.AddOptions<DatabaseOptions>()
                 .Bind(configuration.GetSection(DatabaseOptions.Section))
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
+
+            services.AddScoped<DomainEventInterceptor>();
 
             services.AddHostedService<DatabaseInitializer>();
 
@@ -41,6 +45,8 @@ public static class DatabaseExtensions
 
                 if (databaseOptions.EnableSensitiveDataLogging)
                     options.EnableSensitiveDataLogging();
+
+                options.AddInterceptors(sp.GetRequiredService<DomainEventInterceptor>());
             });
 
             return services;

@@ -1,6 +1,5 @@
 using System.Reflection;
 using Common.Abstractions.Modules;
-using Microsoft.Extensions.Configuration;
 
 namespace Common.Infrastructure.Modules;
 
@@ -8,7 +7,7 @@ public static class ModulesExtensions
 {
     private const string ModuleAssemblyPrefix = "Modules.";
 
-    public static IList<Assembly> LoadAssemblies(IConfiguration configuration)
+    public static IList<Assembly> LoadAssemblies()
     {
         var assemblies = AppDomain.CurrentDomain
             .GetAssemblies()
