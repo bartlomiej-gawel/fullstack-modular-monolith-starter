@@ -2,6 +2,6 @@ namespace Common.Abstractions.Domain;
 
 public abstract record DomainEvent : IDomainEvent
 {
-    public Guid Id { get; init; } = Guid.CreateVersion7();
-    public DateTime OccurredOn { get; init; } = DateTime.UtcNow;
+    public Guid Id { get; } = Guid.CreateVersion7();
+    public DateTime OccurredOn { get; } = DateTime.UtcNow;
 }

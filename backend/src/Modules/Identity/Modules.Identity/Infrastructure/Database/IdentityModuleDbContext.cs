@@ -11,6 +11,8 @@ public sealed class IdentityModuleDbContext : ApplicationDbContext
     }
 
     protected override string Schema => IdentityModuleSchema.Name;
+    protected override bool EnableOutbox => true;
+    protected override bool EnableInbox => true;
 
     public override Task InitializeDataAsync(CancellationToken cancellationToken = default)
     {

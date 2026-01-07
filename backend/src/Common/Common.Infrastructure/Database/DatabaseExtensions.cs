@@ -1,5 +1,4 @@
 using Common.Infrastructure.Database.Interceptors;
-using Common.Infrastructure.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -12,21 +11,19 @@ public static class DatabaseExtensions
 {
     extension(IServiceCollection services)
     {
-        internal IServiceCollection AddDatabase(IConfiguration configuration)
+        internal void AddDatabase(IConfiguration configuration)
         {
             services.AddOptions<DatabaseOptions>()
-                .Bind(configuration.GetSection(DatabaseOptions.Section))
+                .Bind(configuration.GetSection(DatabaseOptions.SectionName))
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
 
             services.AddScoped<DomainEventInterceptor>();
 
             services.AddHostedService<DatabaseInitializer>();
-
-            return services;
         }
 
-        public IServiceCollection AddDatabaseContext<T>(string schemaName)
+        public void AddDatabaseContext<T>(string schemaName)
             where T : ApplicationDbContext
         {
             services.AddDbContext<T>((sp, options) =>
@@ -48,8 +45,6 @@ public static class DatabaseExtensions
 
                 options.AddInterceptors(sp.GetRequiredService<DomainEventInterceptor>());
             });
-
-            return services;
         }
     }
 }

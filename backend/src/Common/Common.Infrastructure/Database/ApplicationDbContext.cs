@@ -4,12 +4,14 @@ namespace Common.Infrastructure.Database;
 
 public abstract class ApplicationDbContext : DbContext
 {
-    protected abstract string Schema { get; }
-
     protected ApplicationDbContext(DbContextOptions options)
         : base(options)
     {
     }
+
+    protected abstract string Schema { get; }
+    protected abstract bool EnableOutbox { get; }
+    protected abstract bool EnableInbox { get; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

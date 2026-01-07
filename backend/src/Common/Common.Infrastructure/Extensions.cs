@@ -1,6 +1,7 @@
 using System.Reflection;
 using Common.Infrastructure.Database;
 using Common.Infrastructure.Domain;
+using Common.Infrastructure.Outbox;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ public static class Extensions
         {
             services.AddDomainEvents();
             services.AddDatabase(configuration);
+            services.AddOutbox(configuration);
         }
 
         public void AddInfrastructureAssemblies(IEnumerable<Assembly> assemblies)
