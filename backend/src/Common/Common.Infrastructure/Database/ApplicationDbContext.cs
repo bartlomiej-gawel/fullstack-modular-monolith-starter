@@ -1,3 +1,4 @@
+using Common.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
 namespace Common.Infrastructure.Database;
@@ -12,6 +13,8 @@ public abstract class ApplicationDbContext : DbContext
     protected abstract string SchemaName { get; }
     protected internal abstract bool EnableOutbox { get; }
     protected internal abstract bool EnableInbox { get; }
+
+    internal DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
