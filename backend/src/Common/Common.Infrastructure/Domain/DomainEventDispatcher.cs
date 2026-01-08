@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
+using Common.Abstractions.Correlation;
 using Common.Abstractions.Domain;
-using Common.Infrastructure.Correlation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 

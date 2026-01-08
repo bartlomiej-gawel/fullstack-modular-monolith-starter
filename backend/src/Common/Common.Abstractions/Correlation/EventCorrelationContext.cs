@@ -1,6 +1,6 @@
-namespace Common.Infrastructure.Correlation;
+namespace Common.Abstractions.Correlation;
 
-internal static class EventCorrelationContext
+public static class EventCorrelationContext
 {
     private static readonly AsyncLocal<Guid?> CorrelationIdValue = new();
 

@@ -1,3 +1,6 @@
+using System.Text.Json;
+using Common.Abstractions.IntegrationEvents;
+using Common.Infrastructure.Database;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,5 +17,26 @@ public static class OutboxExtensions
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
         }
+    }
+
+    public static async Task PublishIntegrationEvent<TEvent>(this ApplicationDbContext dbContext, TEvent integrationEvent)
+        where TEvent : IIntegrationEvent
+    {
+        if (!dbContext.EnableOutbox)
+            throw new InvalidOperationException("Cannot publish integration event. Outbox is disabled");
+
+        var eventType = integrationEvent.GetType();
+        var eventTypeName = eventType.Name;
+        var eventTypeAssemblyName = eventType.AssemblyQualifiedName!;
+        var eventPayload = JsonSerializer.Serialize(integrationEvent, eventType);
+
+        var outboxMessage = OutboxMessage.Create(
+            integrationEvent.Id,
+            eventTypeName,
+            eventTypeAssemblyName,
+            eventPayload,
+            integrationEvent.OccurredAt);
+
+        await dbContext.Set<OutboxMessage>().AddAsync(outboxMessage);
     }
 }
