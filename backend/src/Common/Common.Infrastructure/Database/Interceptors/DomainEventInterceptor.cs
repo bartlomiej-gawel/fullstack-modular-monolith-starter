@@ -37,7 +37,8 @@ public sealed class DomainEventInterceptor : SaveChangesInterceptor
                 .SelectMany(aggregate => aggregate.DomainEvents)
                 .ToList();
 
-            aggregates.ForEach(aggregate => aggregate.ClearDomainEvents());
+            foreach (var aggregate in aggregates)
+                aggregate.ClearDomainEvents();
 
             if (aggregateDomainEvents.Count != 0)
                 await _dispatcher.DispatchAsync(aggregateDomainEvents, cancellationToken);

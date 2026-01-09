@@ -17,7 +17,7 @@ public sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<Outbox
             .HasColumnType("text")
             .IsRequired();
 
-        builder.Property(x => x.EventTypeAssemblyName)
+        builder.Property(x => x.EventTypeAssemblyQualifiedName)
             .HasColumnType("text")
             .IsRequired();
 

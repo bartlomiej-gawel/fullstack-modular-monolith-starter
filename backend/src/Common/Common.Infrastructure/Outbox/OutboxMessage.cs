@@ -9,13 +9,13 @@ public sealed class OutboxMessage
     private OutboxMessage(
         Guid eventId,
         string eventTypeName,
-        string eventTypeAssemblyName,
+        string eventTypeAssemblyQualifiedName,
         string eventPayload,
         DateTime occurredAt)
     {
         EventId = eventId;
         EventTypeName = eventTypeName;
-        EventTypeAssemblyName = eventTypeAssemblyName;
+        EventTypeAssemblyQualifiedName = eventTypeAssemblyQualifiedName;
         EventPayload = eventPayload;
         OccurredAt = occurredAt;
         ProcessedAt = null;
@@ -26,7 +26,7 @@ public sealed class OutboxMessage
 
     public Guid EventId { get; }
     public string EventTypeName { get; } = null!;
-    public string EventTypeAssemblyName { get; } = null!;
+    public string EventTypeAssemblyQualifiedName { get; } = null!;
     public string EventPayload { get; } = null!;
     public DateTime OccurredAt { get; }
     public DateTime? ProcessedAt { get; private set; }
@@ -37,18 +37,18 @@ public sealed class OutboxMessage
     public static OutboxMessage Create(
         Guid eventId,
         string eventTypeName,
-        string eventTypeAssemblyName,
+        string eventTypeAssemblyQualifiedName,
         string eventPayload,
         DateTime occurredAt)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(eventTypeName);
-        ArgumentException.ThrowIfNullOrWhiteSpace(eventTypeAssemblyName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(eventTypeAssemblyQualifiedName);
         ArgumentException.ThrowIfNullOrWhiteSpace(eventPayload);
 
         return new OutboxMessage(
             eventId,
             eventTypeName,
-            eventTypeAssemblyName,
+            eventTypeAssemblyQualifiedName,
             eventPayload,
             occurredAt);
     }

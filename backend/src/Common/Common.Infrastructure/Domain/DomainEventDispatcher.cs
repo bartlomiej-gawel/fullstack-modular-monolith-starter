@@ -8,8 +8,8 @@ namespace Common.Infrastructure.Domain;
 
 public sealed class DomainEventDispatcher : IDomainEventDispatcher
 {
-    private static readonly ConcurrentDictionary<Type, Type> HandlerTypeDictionary = new();
-    private static readonly ConcurrentDictionary<Type, Type> WrapperTypeDictionary = new();
+    private static readonly ConcurrentDictionary<Type, Type> HandlerTypeCache = new();
+    private static readonly ConcurrentDictionary<Type, Type> WrapperTypeCache = new();
 
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<DomainEventDispatcher> _logger;
@@ -33,7 +33,7 @@ public sealed class DomainEventDispatcher : IDomainEventDispatcher
             {
                 EventCorrelationContext.CorrelationId = @event.Id;
 
-                var handlerType = HandlerTypeDictionary.GetOrAdd(
+                var handlerType = HandlerTypeCache.GetOrAdd(
                     eventType,
                     type => typeof(IDomainEventHandler<>).MakeGenericType(type));
 
@@ -70,7 +70,7 @@ public sealed class DomainEventDispatcher : IDomainEventDispatcher
 
         public static DomainHandlerWrapper Create(object handler, Type eventType)
         {
-            var wrapperType = WrapperTypeDictionary.GetOrAdd(
+            var wrapperType = WrapperTypeCache.GetOrAdd(
                 eventType,
                 type => typeof(DomainHandlerWrapper<>).MakeGenericType(type));
 

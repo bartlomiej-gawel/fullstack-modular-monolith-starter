@@ -1,3 +1,4 @@
+using Common.Infrastructure.Database.Configurations;
 using Common.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,10 @@ public abstract class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(SchemaName);
+
+        if (EnableOutbox)
+            modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration());
+
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
         base.OnModelCreating(modelBuilder);

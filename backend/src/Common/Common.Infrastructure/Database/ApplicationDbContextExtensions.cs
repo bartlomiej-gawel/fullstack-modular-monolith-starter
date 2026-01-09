@@ -16,13 +16,13 @@ public static class ApplicationDbContextExtensions
 
             var eventType = integrationEvent.GetType();
             var eventTypeName = eventType.Name;
-            var eventTypeAssemblyName = eventType.AssemblyQualifiedName!;
+            var eventTypeAssemblyQualifiedName = eventType.AssemblyQualifiedName!;
             var eventPayload = JsonSerializer.Serialize(integrationEvent, eventType);
 
             var outboxMessage = OutboxMessage.Create(
                 integrationEvent.Id,
                 eventTypeName,
-                eventTypeAssemblyName,
+                eventTypeAssemblyQualifiedName,
                 eventPayload,
                 integrationEvent.OccurredAt);
 
