@@ -1,4 +1,5 @@
 using Common.Infrastructure.Database.Configurations;
+using Common.Infrastructure.Inbox;
 using Common.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ public abstract class ApplicationDbContext : DbContext
     protected internal abstract bool EnableInbox { get; }
 
     internal DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+    internal DbSet<InboxMessage> InboxMessages => Set<InboxMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,6 +25,9 @@ public abstract class ApplicationDbContext : DbContext
 
         if (EnableOutbox)
             modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration());
+
+        if (EnableInbox)
+            modelBuilder.ApplyConfiguration(new InboxMessageConfiguration());
 
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 

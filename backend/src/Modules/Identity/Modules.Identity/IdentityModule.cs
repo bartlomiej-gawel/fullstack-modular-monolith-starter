@@ -1,5 +1,6 @@
 using Common.Abstractions.Modules;
 using Common.Infrastructure.Database;
+using Common.Infrastructure.Inbox;
 using Common.Infrastructure.Outbox;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ public sealed class IdentityModule : IModule
     {
         services.AddDatabaseContext<IdentityModuleDbContext>(IdentityModuleSchema.Name);
         services.AddOutbox<IdentityModuleDbContext>();
+        services.AddInbox<IdentityModuleDbContext>();
     }
 
     public void Use(WebApplication app)
