@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Common.Infrastructure.Outbox;
 
-internal sealed class OutboxOptions
+public sealed class OutboxOptions
 {
     public const string SectionName = "Outbox";
 
