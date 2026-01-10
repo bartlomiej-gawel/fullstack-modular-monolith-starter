@@ -38,13 +38,10 @@ public sealed class OutboxProcessor<TDbContext> : BackgroundService
                 using var scope = _serviceProvider.CreateScope();
 
                 var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
-                var dispatcher = scope.ServiceProvider.GetRequiredService<IIntegrationEventDispatcher>();
-
                 if (!dbContext.EnableOutbox)
-                {
-                    _logger.LogWarning("Outbox processor started for not enabled DbContext: '{DbContext}'", _dbContextName);
                     return;
-                }
+
+                var dispatcher = scope.ServiceProvider.GetRequiredService<IIntegrationEventDispatcher>();
 
                 await dbContext.Database.CreateExecutionStrategy().ExecuteAsync(async () =>
                 {
@@ -65,7 +62,6 @@ public sealed class OutboxProcessor<TDbContext> : BackgroundService
                         .ToListAsync(stoppingToken);
 
                     processedCount = outboxMessages.Count;
-
                     if (processedCount > 0)
                     {
                         foreach (var outboxMessage in outboxMessages)
@@ -92,7 +88,7 @@ public sealed class OutboxProcessor<TDbContext> : BackgroundService
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing outbox messages for '{DbContext}'", _dbContextName);
+                _logger.LogError(ex, "Error occured during processing outbox messages for '{DbContext}'", _dbContextName);
             }
 
             if (processedCount >= _options.Value.BatchSize)
