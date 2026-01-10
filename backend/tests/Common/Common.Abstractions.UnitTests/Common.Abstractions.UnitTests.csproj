@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="TUnit" Version="1.9.42"/>
+        <PackageReference Include="TUnit" Version="1.9.55" />
     </ItemGroup>
 
 </Project>
