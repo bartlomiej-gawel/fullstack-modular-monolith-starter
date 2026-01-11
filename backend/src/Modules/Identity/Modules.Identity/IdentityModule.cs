@@ -5,6 +5,7 @@ using Common.Infrastructure.Outbox;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Modules.Identity.Endpoints.BackofficeUsers;
 using Modules.Identity.Infrastructure.Database;
 
 namespace Modules.Identity;
@@ -20,5 +21,6 @@ public sealed class IdentityModule : IModule
 
     public void Use(WebApplication app)
     {
+        BackofficeUsersEndpointGroup.MapGroup(app);
     }
 }

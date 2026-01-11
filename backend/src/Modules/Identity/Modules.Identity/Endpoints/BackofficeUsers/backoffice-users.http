@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:5001/api/backoffice/identity-module/users
+@userId = 00000000-0000-0000-0000-000000000000
+
+### Browse backoffice users
+POST {{baseUrl}}/browse
+Content-Type: application/json
+
+{
+  "page": 1,
+  "pageSize": 10,
+  "sortDesc": false,
+  "searchPattern": "Contains",
+  "searchCaseSensitive": false
+}
+
+### Browse backoffice users (with status filter)
+POST {{baseUrl}}/browse
+Content-Type: application/json
+
+{
+  "page": 1,
+  "pageSize": 10,
+  "sortDesc": false,
+  "searchPattern": "Contains",
+  "searchCaseSensitive": false,
+  "status": "Active"
+}
+
+### Browse backoffice users (with search)
+POST {{baseUrl}}/browse
+Content-Type: application/json
+
+{
+  "page": 1,
+  "pageSize": 10,
+  "sortDesc": false,
+  "searchPattern": "Contains",
+  "searchCaseSensitive": false,
+  "search": "admin"
+}
+
+### Get backoffice user by id
+GET {{baseUrl}}/{{userId}}
+
+### Create backoffice user
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phonePrefix": "+48",
+  "phoneNumber": "500600700"
+}
