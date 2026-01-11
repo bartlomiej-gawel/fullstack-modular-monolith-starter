@@ -11,7 +11,8 @@ public sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<Outbox
         builder.HasKey(x => x.EventId);
 
         builder.Property(x => x.EventId)
-            .ValueGeneratedNever();
+            .ValueGeneratedNever()
+            .IsRequired();
 
         builder.Property(x => x.EventTypeName)
             .HasColumnType("text")
@@ -25,21 +26,15 @@ public sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<Outbox
             .HasColumnType("jsonb")
             .IsRequired();
 
-        builder.Property(x => x.OccurredAt)
-            .IsRequired();
-
-        builder.Property(x => x.ProcessedAt)
-            .IsRequired(false);
+        builder.Property(x => x.OccurredAt).IsRequired();
+        builder.Property(x => x.ProcessedAt).IsRequired(false);
 
         builder.Property(x => x.Error)
             .HasColumnType("text")
             .IsRequired(false);
 
-        builder.Property(x => x.RetryCount)
-            .IsRequired();
-
-        builder.Property(x => x.LastRetryAt)
-            .IsRequired(false);
+        builder.Property(x => x.RetryCount).IsRequired();
+        builder.Property(x => x.LastRetryAt).IsRequired(false);
 
         builder.HasIndex(x => new { x.ProcessedAt, x.OccurredAt });
     }

@@ -33,16 +33,12 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ComplexProperty(x => x.EmailVerificationToken, b =>
         {
             b.ToJson();
-
             b.Property(t => t.Value)
                 .HasMaxLength(44)
                 .IsRequired();
 
-            b.Property(t => t.CreatedAt)
-                .IsRequired();
-
-            b.Property(t => t.ExpiresAt)
-                .IsRequired();
+            b.Property(t => t.CreatedAt).IsRequired();
+            b.Property(t => t.ExpiresAt).IsRequired();
         });
 
         builder.Property(x => x.Password)
@@ -53,22 +49,17 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ComplexProperty(x => x.PasswordResetToken, b =>
         {
             b.ToJson();
-
             b.Property(t => t.Value)
                 .HasMaxLength(44)
                 .IsRequired();
 
-            b.Property(t => t.CreatedAt)
-                .IsRequired();
-
-            b.Property(t => t.ExpiresAt)
-                .IsRequired();
+            b.Property(t => t.CreatedAt).IsRequired();
+            b.Property(t => t.ExpiresAt).IsRequired();
         });
 
         builder.ComplexProperty(x => x.Phone, b =>
         {
             b.ToJson();
-
             b.Property(p => p.Prefix)
                 .HasMaxLength(5)
                 .IsRequired();
@@ -88,10 +79,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(20)
             .IsRequired();
 
-        builder.Property(x => x.CreatedAt)
-            .IsRequired();
-
-        builder.Property(x => x.UpdatedAt)
-            .IsRequired(false);
+        builder.Property(x => x.CreatedAt).IsRequired();
+        builder.Property(x => x.UpdatedAt).IsRequired(false);
     }
 }

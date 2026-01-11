@@ -11,7 +11,8 @@ public sealed class InboxMessageConfiguration : IEntityTypeConfiguration<InboxMe
         builder.HasKey(x => new { x.EventId, x.EventHandlerTypeName });
 
         builder.Property(x => x.EventId)
-            .ValueGeneratedNever();
+            .ValueGeneratedNever()
+            .IsRequired();
 
         builder.Property(x => x.EventTypeName)
             .HasColumnType("text")
@@ -21,11 +22,8 @@ public sealed class InboxMessageConfiguration : IEntityTypeConfiguration<InboxMe
             .HasColumnType("text")
             .IsRequired();
 
-        builder.Property(x => x.ProcessedAt)
-            .IsRequired();
-
-        builder.Property(x => x.CorrelationId)
-            .IsRequired(false);
+        builder.Property(x => x.ProcessedAt).IsRequired();
+        builder.Property(x => x.CorrelationId).IsRequired(false);
 
         builder.HasIndex(x => x.ProcessedAt);
     }

@@ -37,12 +37,12 @@ public sealed class Message : AggregateRoot<MessageId>
         DeletedAt = null;
     }
 
-    public RecipientId RecipientId { get; private set; } = null!;
-    public string Subject { get; private set; } = null!;
-    public string Content { get; private set; } = null!;
-    public MessageChannel Channel { get; private set; }
+    public RecipientId RecipientId { get; } = null!;
+    public string Subject { get; } = null!;
+    public string Content { get; } = null!;
+    public MessageChannel Channel { get; }
     public MessageStatus Status { get; private set; }
-    public DateTime CreatedAt { get; private set; }
+    public DateTime CreatedAt { get; }
     public DateTime? SentAt { get; private set; }
     public DateTime? FailedAt { get; private set; }
     public string? FailureReason { get; private set; }
